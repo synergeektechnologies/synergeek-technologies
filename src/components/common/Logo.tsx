@@ -19,14 +19,14 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', isDark = false
       <img 
         src={logoImage}
         alt="Synergeek Logo" 
-        className={`${sizes[size]} aspect-auto object-contain ${isDark ? 'brightness-100' : 'brightness-100'}`}
+        className={`${sizes[size]} aspect-auto object-contain rounded-sm ${isDark ? 'brightness-100' : 'brightness-100'}`}
       />
       <span className={`font-bold ml-3 ${
         size === 'sm' ? 'text-xl' : 
         size === 'md' ? 'text-2xl' : 
         'text-3xl'
       }`}>
-        Synergeek
+        Synergeek Technologies
       </span>
     </div>
   );
