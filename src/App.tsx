@@ -1,40 +1,15 @@
-import Navbar from './components/layout/Navbar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import Testimonials from './components/Testimonials';
-import About from './components/About';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
-import AnimatedSection from './components/AnimatedSection';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './components/Homepage';
 
-function App() {
+const App = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <Hero />
-        <AnimatedSection>
-          <Services />
-        </AnimatedSection>
-        <AnimatedSection>
-          <Portfolio />
-        </AnimatedSection>
-        <AnimatedSection>
-          <Testimonials />
-        </AnimatedSection>
-        <AnimatedSection>
-          <About />
-        </AnimatedSection>
-        <AnimatedSection>
-          <Contact />
-        </AnimatedSection>
-      </main>
-      <Footer />
-      <ScrollToTop />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="*" element={<h2>Page Not Found</h2>} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
