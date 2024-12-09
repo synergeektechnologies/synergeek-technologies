@@ -24,6 +24,7 @@
     "sitemap": "^8.0.0",
     "swiper": "^11.0.7",
     "three": "^0.162.0",
+    "vite-plugin-sitemap": "^0.7.1",
     "vite-react-typescript-starter": "file:"
   },
   "devDependencies": {
