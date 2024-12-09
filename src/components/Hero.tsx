@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import Spline from '@splinetool/react-spline';
+import { FaWhatsapp } from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -12,7 +13,7 @@ const Hero = () => {
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-indigo-800/20 to-indigo-900/30"></div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
+      <div className="relative max-w-7xl mx-auto px-7 sm:px-6 lg:px-8 py-12 sm:py-20">
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl tracking-tight font-extrabold drop-shadow-lg">
             <span className="block text-[#f8f9fa] text-shadow-lg mb-2">
@@ -49,10 +50,13 @@ const Hero = () => {
           href="https://wa.me/919677561597"
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-1 right-1 bg-green-500 text-white rounded-lg px-9 py-2 shadow-lg hover:bg-green-600 transition-all duration-300 text-sm sm:text-base font-medium"
+          className="absolute bottom-1 right-1 bg-green-500 text-white rounded-lg px-6 py-2 shadow-lg hover:bg-green-600 transition-all duration-300 text-sm sm:text-base font-medium"
           aria-label="Contact on WhatsApp"
-        >
-          WhatsApp
+          >
+          <span className="flex items-center space-x-2">
+            <FaWhatsapp />
+            <span>WhatsApp</span>
+          </span>
         </a>
       </div>
     </section>
