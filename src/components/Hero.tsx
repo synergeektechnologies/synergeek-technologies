@@ -62,7 +62,7 @@ const Hero = () => {
           className="absolute bottom-1 right-1 bg-green-500 text-white rounded-lg px-6 py-2 shadow-lg hover:bg-green-600 transition-all duration-300 text-sm sm:text-base font-medium"
           aria-label="Contact on WhatsApp"
           >
-          <span className="flex items-center space-x-2">
+          <span className="flex items-center space-x-2 font-bold text-lg">
             <FaWhatsapp />
             <span>WhatsApp</span>
           </span>
