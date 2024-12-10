@@ -1,6 +1,6 @@
 import { Github, Linkedin, Instagram, Facebook, Phone, Mail, MapPin } from 'lucide-react';
-import Logo from './common/Logo';
-import { CONTACT_INFO } from '../utils/constants';
+import Logo from '../common/Logo';
+import { CONTACT_INFO } from '../../utils/constants';
 
 const Footer = () => {
   return (

@@ -1,13 +1,13 @@
-import Navbar from './layout/Navbar';
-import Hero from './Hero';
-import Services from './Services';
-import Portfolio from './Portfolio';
-import Testimonials from './Testimonials';
-import About from './About';
-import Contact from './Contact';
-import Footer from './Footer';
-import ScrollToTop from './ScrollToTop';
-import AnimatedSection from './AnimatedSection';
+import Navbar from '../components/snippets/Navbar';
+import Hero from '../components/Hero';
+import Services from '../components/Services';
+import Portfolio from '../components/Portfolio';
+import Testimonials from '../components/Testimonials';
+import About from '../components/About';
+import Contact from '../components/Contact';
+import Footer from '../components/snippets/Footer';
+import ScrollToTop from '../components/ScrollToTop';
+import AnimatedSection from '../components/AnimatedSection';
 
 const Homepage = () => {
   return (

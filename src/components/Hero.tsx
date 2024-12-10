@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import Spline from '@splinetool/react-spline';
+import video from '../assets/video.mp4';
 import { FaWhatsapp } from "react-icons/fa";
 
 const Hero = () => {
@@ -9,7 +9,16 @@ const Hero = () => {
       className="relative min-h-screen pt-16 sm:pt-20 overflow-hidden"
     >
       <div className="absolute inset-0 -z-10">
-        <Spline scene="https://prod.spline.design/18aCWbXQ-mo-uEKk/scene.splinecode" />
+        <video
+          className="object-cover w-full h-full"
+          autoPlay
+          loop
+          muted
+          playsInline
+        >
+          <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/30 via-indigo-800/20 to-indigo-900/30"></div>
