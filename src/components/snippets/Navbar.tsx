@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from '../common/Logo';
 
@@ -7,109 +7,77 @@ const navItems = [
   { label: 'Services', href: '#services' },
   { label: 'Portfolio', href: '#portfolio' },
   { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Contact', href: '#contact' }
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const scrollHandlerRef = useRef<() => void>();
 
-  // Optimized throttle function
-  const throttle = useCallback((fn: () => void, limit: number) => {
-    let lastCall = 0;
-    return () => {
+  const throttle = <T extends (...args: any[]) => void>(func: T, delay: number) => {
+    let lastTime = 0;
+  
+    return (...args: Parameters<T>) => {
       const now = Date.now();
-      if (now - lastCall >= limit) {
-        lastCall = now;
-        fn();
+      if (now - lastTime >= delay) {
+        lastTime = now;
+        func(...args);
       }
     };
-  }, []);
+  };
 
-  const handleScroll = useCallback(() => {
-    setIsScrolled(window.scrollY > 150);
-  }, []);
 
-  // Memoize the throttled scroll handler
-  const throttledScrollHandler = useMemo(
-    () => throttle(handleScroll, 100),
-    [handleScroll, throttle]
+  const handleScroll = useCallback(
+    throttle(() => setIsScrolled(window.scrollY > 150), 100),
+    []
   );
 
   useEffect(() => {
-    scrollHandlerRef.current = throttledScrollHandler;
-    window.addEventListener('scroll', scrollHandlerRef.current);
+    const onScroll = () => handleScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScroll]);
 
-    return () => {
-      window.removeEventListener('scroll', scrollHandlerRef.current!);
-    };
-  }, [throttledScrollHandler]);
+  const navItemClasses = useMemo(
+    () => (isScrolled ? 'text-gray-700 hover:text-indigo-600' : 'text-white/90 hover:text-white'),
+    [isScrolled]
+  );
 
-  const renderNavItems = useMemo(
-    () =>
-      navItems.map((item) => (
-        <a
-          key={item.label}
-          href={item.href}
-          onClick={() => setIsOpen(false)}
-          className={`${
-            isScrolled
-              ? 'text-gray-700 hover:text-indigo-600'
-              : 'text-white/90 hover:text-white'
-          } transition-colors duration-200 font-medium`}
-        >
-          {item.label}
-        </a>
-      )),
+  const buttonClass = useMemo(
+    () => (isScrolled ? 'text-gray-700' : 'text-white'),
     [isScrolled]
   );
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 will-change-transform ${
-        isScrolled
-          ? 'bg-white/70 backdrop-blur-lg shadow-lg'
-          : 'bg-transparent'
-      }`}
-    >
+    <nav className={`fixed w-full z-50 transition-all duration-300 will-change-transform ${isScrolled ? 'bg-white/70 backdrop-blur-lg shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          {/* Logo */}
           <div className="flex items-center">
-            <Logo
-              className={isScrolled ? 'text-gray-800' : 'text-white'}
-              size="md"
-              isDark={isScrolled}
-            />
+            <Logo className={isScrolled ? 'text-gray-800' : 'text-white'} size="md" isDark={isScrolled} />
           </div>
-
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
-            {renderNavItems}
+            {navItems.map(item => (
+              <a key={item.label} href={item.href} className={`${navItemClasses} transition-colors duration-200 font-medium`}>
+                {item.label}
+              </a>
+            ))}
           </div>
-
-          {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen((prev) => !prev)}
-              className={`rounded-md focus:outline-none ${
-                isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-              aria-label="Toggle menu"
-              aria-expanded={isOpen}
-            >
+            <button onClick={() => setIsOpen(!isOpen)} className={`rounded-md focus:outline-none ${buttonClass}`} aria-label="Toggle menu">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-white/80 backdrop-blur-lg border-t border-gray-200/20">
-            {renderNavItems}
+            {navItems.map(item => (
+              <a key={item.label} href={item.href} className="block px-3 py-2 text-gray-700 hover:text-indigo-600 hover:bg-gray-50/50 rounded-md transition-all duration-200" onClick={() => setIsOpen(false)}>
+                {item.label}
+              </a>
+            ))}
           </div>
         </div>
       )}
